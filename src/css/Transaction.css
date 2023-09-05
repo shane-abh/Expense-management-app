@@ -1,0 +1,38 @@
+select, input[type=date]{
+    padding:  10px 0;
+    background-color: #332D2D;
+    color: white;
+    border-radius: 5px;
+    border: 1px solid white;
+    width: 100%;
+}
+
+option{
+    color: white;
+    background-color: aliceblue;
+}
+
+table, th, td{
+    padding: 2px;
+    border: 2px solid black;
+   
+    border-collapse: collapse;
+}
+
+table{
+    margin: 40px auto;
+}
+
+.icon{
+    width: 25px;
+    cursor: pointer;
+    margin: auto 5px ;
+    padding: 2px;
+}
+
+.icon:hover{
+    background: linear-gradient(90deg, #e3efff, rgb(250, 218, 218));
+    border-radius: 10px;
+   
+    
+}
