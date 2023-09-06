@@ -1,27 +1,48 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 
 import ReadOnlyRow from "./TranasctionsTable/ReadOnlyRow";
 import EditableRow from "./TranasctionsTable/EditableRow";
 
-const TransactionList = ({ authenticatedUser }) => {
+const TransactionList = ({ authenticatedUser , transactions}) => {
+
   const userData = JSON.parse(
     localStorage.getItem(`user${authenticatedUser.id}`)
   );
 
+  useEffect(() => {
+    // This effect will run whenever transactions change
+    // You can perform any actions needed when the data updates
+    console.log('Transactions updated:', transactions);
+
+    if(transactions)
+    setTableData(transactions.transactions)
+
+
+  }, [transactions]);
+
   const updateBalance = () => {
     let balance = 0;
-    userData.transactions.forEach((transaction, i) => {
-      balance +=
-        transaction.type === "Income"
-          ? transaction.amount
-          : -transaction.amount;
+    userData.transactions.sort((a, b) => new Date(a.date) - new Date(b.date));
 
+    userData.transactions.forEach((transaction, i) => {
+      if (transaction.amount == "") {
+        return;
+      } else {
+        balance +=
+          transaction.type === "Income"
+            ? parseFloat(transaction.amount)
+            : -parseFloat(transaction.amount);
+      }
       userData.transactions[i].balance = balance;
     });
   };
   updateBalance();
-  console.log(userData.transactions);
+  
+
   const [tableData, setTableData] = useState(userData.transactions);
+
+
+
   const [editTransactionID, setEditTransactionID] = useState(null);
 
   const [editedFormData, setEditedFormData] = useState({
@@ -33,6 +54,10 @@ const TransactionList = ({ authenticatedUser }) => {
     balance: "",
   });
 
+  const updateUserDataInLocalStorage = (userData) => {
+    const userDataJSON = JSON.stringify(userData);
+    localStorage.setItem(`user${authenticatedUser.id}`, userDataJSON);
+  };
   const handleEditFormChange = (event) => {
     event.preventDefault();
 
@@ -82,23 +107,43 @@ const TransactionList = ({ authenticatedUser }) => {
 
     newTransactions[index] = editedData;
 
-    setTableData(newTransactions)
-    setEditTransactionID(null)
+    newTransactions.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+    let bal = 0;
+    newTransactions.forEach((transaction, i) => {
+      if (transaction.amount === "") {
+        return null;
+      } else {
+        bal +=
+          transaction.type === "Income"
+            ? parseFloat(transaction.amount)
+            : -parseFloat(transaction.amount);
+      }
+
+      newTransactions[i].balance = bal;
+    });
+    console.log(newTransactions);
+
+    setTableData(newTransactions);
+    userData.transactions = newTransactions;
+
+    updateUserDataInLocalStorage(userData);
+    setEditTransactionID(null);
   };
 
-
   const handleCancelClick = () => {
-    setEditTransactionID(null)
-  }
+    setEditTransactionID(null);
+  };
 
   const handleDeleteClick = (index) => {
     const newTransaction = [...tableData];
-    // const index = editTransactionID;
 
     newTransaction.splice(index, 1);
+    userData.transactions = newTransaction;
 
-    setTableData(newTransaction)
-  }
+    setTableData(newTransaction);
+    updateUserDataInLocalStorage(userData);
+  };
 
   return (
     <div>
@@ -116,6 +161,7 @@ const TransactionList = ({ authenticatedUser }) => {
             </tr>
           </thead>
           <tbody>
+           
             {tableData.map((item, index) => {
               return (
                 <>

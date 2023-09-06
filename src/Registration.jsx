@@ -8,8 +8,11 @@ import {
   MDBCheckbox,
 } from "mdb-react-ui-kit";
 import "./css/Registration.css";
+import { useNavigate } from "react-router-dom";
 
 const Registration = () => {
+  const navigate = useNavigate();
+
   function generateUniqueId() {
     const timestamp = Date.now();
     const randomNumber = Math.random().toString(36).substring(2, 7);
@@ -71,6 +74,7 @@ const Registration = () => {
       localStorage.setItem(`user${data.id}`, JSON.stringify(userData));
 
       console.log(" Go to login page");
+      navigate("/login");
     }
   };
 

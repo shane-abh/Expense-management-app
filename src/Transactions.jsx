@@ -14,18 +14,28 @@ import TransactionForm from "./Transactions/TransactionForm";
 import TransactionList from "./Transactions/TransactionList";
 
 const Transactions = () => {
-  const authenticatedUser = JSON.parse(sessionStorage.getItem("authenticatedUser")) || {};
+  const authenticatedUser =
+    JSON.parse(sessionStorage.getItem("authenticatedUser")) || {};
 
-  console.log(`user${authenticatedUser.id}`)
-   const userData = JSON.parse(localStorage.getItem(`user${authenticatedUser.id}`))
- 
+  console.log(`user${authenticatedUser.id}`);
+  const userData = JSON.parse(
+    localStorage.getItem(`user${authenticatedUser.id}`)
+  );
+
+  const [transactions, setTransactions] = useState(userData);
   return (
     <div>
+      <TransactionForm
+        authenticatedUser={authenticatedUser}
+        updateTransactions={setTransactions}
+      />
 
-   <TransactionForm authenticatedUser={authenticatedUser}/> 
-   <TransactionList authenticatedUser={authenticatedUser}/>
+      <TransactionList
+        authenticatedUser={authenticatedUser}
+        transactions={transactions}
+      />
     </div>
-  )
+  );
 };
 
 export default Transactions;

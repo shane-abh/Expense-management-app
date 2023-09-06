@@ -11,14 +11,14 @@ import {
 } from "mdb-react-ui-kit";
 import "../css/Transaction.css";
 
-const TransactionForm = ({authenticatedUser}) => {
-
-  const userData = JSON.parse(localStorage.getItem(`user${authenticatedUser.id}`))
-
+const TransactionForm = ({ authenticatedUser, updateTransactions  }) => {
+  const userData = JSON.parse(
+    localStorage.getItem(`user${authenticatedUser.id}`)
+  );
 
   const [isIncome, setIsIncome] = useState(true);
   const [selectedValue, setSelectedValue] = useState("");
-  const [amount, setAmount] = useState("");
+  const [amount, setAmount] = useState(0.0);
   const [description, setDescription] = useState("");
   const [date, setDate] = useState(new Date());
 
@@ -59,11 +59,21 @@ const TransactionForm = ({authenticatedUser}) => {
   const categoriesData = isIncome ? incomeOptions : expenseOptions;
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (userData) {
       const transactions = userData.transactions || [];
 
-      // transactions.sort((a, b) => new Date(a.date) - new Date(b.date));
+      if (
+        date == "" ||
+        selectedValue == "Category" ||
+        amount == "" ||
+        description == ""
+      ) {
+        alert("invalid inputs");
+        return;
+      }
+
+      transactions.sort((a, b) => new Date(a.date) - new Date(b.date));
 
       let balance = 0;
       // // Recalculate balances for all transactions
@@ -79,11 +89,10 @@ const TransactionForm = ({authenticatedUser}) => {
 
       // Add the current transaction's amount to the balance
       if (isIncome) {
-        balance +=parseFloat( amount);
-      } else  {
+        balance += parseFloat(amount);
+      } else {
         balance -= parseFloat(amount);
       }
-
 
       const newTransactionData = {
         type: isIncome ? "Income" : "Expense",
@@ -93,19 +102,17 @@ const TransactionForm = ({authenticatedUser}) => {
         description: description,
         balance: balance,
       };
-  
+
       userData.transactions.push(newTransactionData);
-  
-      console.log(newTransactionData)
+
+      console.log(newTransactionData);
+
+      updateTransactions(userData)
+
 
       const userDataJSON = JSON.stringify(userData);
-  localStorage.setItem(`user${authenticatedUser.id}`, userDataJSON);
-
+      localStorage.setItem(`user${authenticatedUser.id}`, userDataJSON);
     }
-
-    
-
-   
   };
   return (
     <MDBCard
@@ -127,6 +134,7 @@ const TransactionForm = ({authenticatedUser}) => {
             id="toggleSwitch"
             checked={isIncome}
             onChange={toggleSwitch}
+            required
           />
           <label className="form-check-label mb-2 fs-4" htmlFor="toggleSwitch">
             {isIncome ? "Income" : "Expense"}
@@ -137,6 +145,7 @@ const TransactionForm = ({authenticatedUser}) => {
           id="category"
           className="select mb-4 w-100"
           onChange={handleSelect}
+          required
         >
           <option>Category</option>
           {categoriesData.map((item, key) => {
@@ -176,15 +185,11 @@ const TransactionForm = ({authenticatedUser}) => {
         />
 
         <input
-        
           type="date"
-        
-          
           value={date}
-          onChange={(e) => setDate(new Date(e.target.value))}
+          onChange={(e) => setDate((e.target.value))}
           required
         />
-
 
         <MDBBtn
           outline

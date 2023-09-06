@@ -1,0 +1,35 @@
+.cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px auto;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.card {
+    background-color: aliceblue;
+    padding: 20px;
+    margin: auto 10px;
+    border-radius: 10px;
+}
+
+.card p {
+    font-size: 25px;
+    font-weight: bolder;
+    text-align: center;
+   
+}
+
+.income{
+    color: rgb(22, 170, 22);
+}
+
+.expense{
+    color: rgb(216, 34, 34);
+}
+
+.savings{
+    color: rgb(54, 54, 194);
+}

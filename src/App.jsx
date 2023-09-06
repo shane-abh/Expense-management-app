@@ -9,24 +9,20 @@ import Registration from "./Registration";
 import Home from "./Home";
 import Login from "./Login";
 import Transactions from "./Transactions";
+import Dashboard from "./Dashboard";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <div>
-        <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />}/>
-        <Route path="/login" element={<Login />}/>
-        <Route path="/registration" element={<Registration />}/>
-        <Route path="/transaction" element={<Transactions />}/>
-
-          
-      
-       
-      </Routes>
-    </BrowserRouter>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/registration" element={<Registration />} />
+          <Route path="/transaction" element={<Transactions />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

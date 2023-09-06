@@ -1,0 +1,73 @@
+/* App.css */
+
+/* Reset some default styles */
+body, ul, li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  /* Styles for the header */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 20px;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .header .logo img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .logo h2{
+    color: #fff;
+  }
+  
+  .header .nav ul {
+    display: flex;
+    list-style: none;
+  }
+  .header .menu-icon line {
+    transition: stroke 0.3s ease-in-out;
+  }
+  .header .nav ul li {
+    margin-right: 20px;
+  }
+  
+  .header .menu-icon {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 5px;
+  }
+
+  li a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+  }
+
+  
+  /* Media query for smaller screens */
+  @media (max-width: 768px) {
+    .header .nav {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 70px;
+      left: 0;
+      background-color: #333;
+      width: 100%;
+      text-align: center;
+    }
+  
+    .header .nav.active {
+      display: flex;
+    }
+  
+  
+  }
+  

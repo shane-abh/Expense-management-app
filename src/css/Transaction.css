@@ -13,7 +13,7 @@ option{
 }
 
 table, th, td{
-    padding: 2px;
+    
     border: 2px solid black;
    
     border-collapse: collapse;
@@ -21,6 +21,16 @@ table, th, td{
 
 table{
     margin: 40px auto;
+}
+
+th{
+    text-align: center;
+    padding: 5px 10px ;
+    
+}
+
+td{
+    padding: 5px 10px ;
 }
 
 .icon{
