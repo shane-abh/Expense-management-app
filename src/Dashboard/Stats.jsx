@@ -6,10 +6,17 @@ import {
   MDBCardText,
   MDBBtn,
 } from "mdb-react-ui-kit";
-import '../css/Stats.css'
+import "../css/Stats.css";
+import income from "../assets/income.svg";
+import expense from "../assets/expense.svg";
+import savings from "../assets/savings.svg";
 
-const Stats = ({ userData, statsData, setStatsData, updateUserDataInLocalStorage }) => {
-  
+const Stats = ({
+  userData,
+  statsData,
+  setStatsData,
+  updateUserDataInLocalStorage,
+}) => {
   if (userData) {
     const transactions = userData.transactions;
     const budgetCategories = userData.budgetCategories;
@@ -40,22 +47,38 @@ const Stats = ({ userData, statsData, setStatsData, updateUserDataInLocalStorage
     userData.dashboardData.totalExpenses = statsData.totalExpenses;
     userData.dashboardData.overallSavings = statsData.overallSavings;
 
-    updateUserDataInLocalStorage(userData)
+    updateUserDataInLocalStorage(userData);
   }
   return (
     <div className="cards">
-        <div className="card">
-            <h2>Income</h2>
-            <p className="income">{statsData.totalIncome}</p>
+      <div className="card">
+        <div className="circle">
+          <img src={income} className="cardicon" />
         </div>
-        <div className="card">
-            <h2>Expense</h2>
-            <p className="expense">{statsData.totalExpenses}</p>
+        <div>
+          <h2>Income</h2>
+          <p className="income">{statsData.totalIncome}</p>
         </div>
-        <div className="card">
-            <h2>Overall Savings</h2>
-            <p className="savings">{statsData.overallSavings}</p>
+      </div>
+
+      <div className="card">
+        <div className="circle" style={{backgroundColor: 'rgb(216, 34, 34)'}}>
+          <img src={expense} className="cardicon" />
         </div>
+        <div>
+          <h2>Expense</h2>
+          <p className="expense">{statsData.totalExpenses}</p>
+        </div>
+      </div>
+      <div className="card">
+        <div className="circle" style={{backgroundColor:'blue'}}>
+          <img src={savings} className="cardicon" />
+        </div>
+        <div>
+          <h2>Overall Savings</h2>
+          <p className="savings">{statsData.overallSavings}</p>
+        </div>
+      </div>
     </div>
   );
 };

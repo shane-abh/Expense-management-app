@@ -1,5 +1,6 @@
-select, input[type=date]{
-    padding:  10px 0;
+select,
+input[type=date] {
+    padding: 10px 0;
     background-color: #332D2D;
     color: white;
     border-radius: 5px;
@@ -7,42 +8,54 @@ select, input[type=date]{
     width: 100%;
 }
 
-option{
+option {
     color: white;
     background-color: aliceblue;
 }
 
-table, th, td{
-    
+table,
+th,
+td {
+
     border: 2px solid black;
-   
+
     border-collapse: collapse;
 }
 
-table{
-    margin: 40px auto;
+
+
+.fixedHead {
+    overflow-y: auto;
+    /* make the table scrollable if height is more than 200 px  */
+    height: 400px;
 }
 
-th{
+.fixedHead thead th {
+    position: sticky;
+    top: 0px;
+    background-color: antiquewhite;
+}
+
+th {
     text-align: center;
-    padding: 5px 10px ;
-    
+    padding: 5px 10px;
+
 }
 
-td{
-    padding: 5px 10px ;
+td {
+    padding: 5px 10px;
 }
 
-.icon{
+.icon {
     width: 25px;
     cursor: pointer;
-    margin: auto 5px ;
+    margin: auto 5px;
     padding: 2px;
 }
 
-.icon:hover{
+.icon:hover {
     background: linear-gradient(90deg, #e3efff, rgb(250, 218, 218));
     border-radius: 10px;
-   
-    
+
+
 }

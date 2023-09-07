@@ -148,6 +148,9 @@ const TransactionList = ({ authenticatedUser , transactions}) => {
   return (
     <div>
       <form onSubmit={handleEditFormSubmit}>
+        <div className="fixedHead">
+
+        
         <table>
           <thead className="thead-dark">
             <tr>
@@ -184,6 +187,7 @@ const TransactionList = ({ authenticatedUser , transactions}) => {
             })}
           </tbody>
         </table>
+        </div>
       </form>
     </div>
   );

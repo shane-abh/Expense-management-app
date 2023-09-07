@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import './css/Header.css'
+import "./css/Header.css";
+import { Navigate } from "react-router-dom";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 800);
-
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    () => sessionStorage.getItem("authenticatedUser") !== null
+  );
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
-    
   };
 
   useEffect(() => {
@@ -15,14 +17,20 @@ const Header = () => {
       setIsMobile(window.innerWidth < 800);
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     // Cleanup the event listener when the component unmounts
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
+  const handleLogOut = () => {
+    sessionStorage.removeItem("authenticatedUser");
+    setIsLoggedIn(false)
+    Navigate('/')
+
+  }
 
   return (
     <div>
@@ -30,23 +38,26 @@ const Header = () => {
         <div className="logo">
           <h2>Expense Manager</h2>
         </div>
-       
+
         <nav className="nav">
           <ul>
             <li>
               <a href="/">Home</a>
             </li>
             <li>
-              <a href="/dasboard">Dashboard</a>
+              
+              
+              
+              <a href={isLoggedIn? "/dashboard": "/login"}>Dashboard</a>
             </li>
             <li>
-              <a href="/transaction">Transactions</a>
+              <a href={isLoggedIn? "/transaction" : "/login"}>Transactions</a>
             </li>
             <li>
-              <a href="/budgets">Budgets</a>
+              <a href={isLoggedIn? "/budgets" : "/login"}>Budgets</a>
             </li>
             <li>
-              <a href="/budgets">Log Out</a>
+              <a href="/" onClick={handleLogOut}>Log Out</a>
             </li>
           </ul>
         </nav>

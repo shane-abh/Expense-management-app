@@ -36,7 +36,7 @@ const PieChart = ({ statsData }) => {
   };
   return (
     <div>
-      <div style={{ maxWidth: "400px", margin: "10px auto" }}>
+      <div style={{ maxWidth: "300px", margin: "10px auto" }}>
         <Doughnut data={data} options={options} />
       </div>
     </div>

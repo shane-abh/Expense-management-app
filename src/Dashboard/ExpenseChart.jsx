@@ -86,13 +86,14 @@ const ExpenseChart = ({ userData }) => {
             size: 20,
           },
         },
+        
         ticks: { color: legendColor },
       },
       y: {
         display: true,
         title: {
           display: true,
-          text: "Payment Amount ($)",
+          text: "Amount ($)",
           color: legendColor,
           font: {
             size: 20,

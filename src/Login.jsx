@@ -10,7 +10,7 @@ import {
   MDBIcon,
 } from "mdb-react-ui-kit";
 import Home from "./Home";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -80,11 +80,14 @@ const Login = () => {
                 </a>
               </p>
               <MDBBtn
+              type="submit"
                 outline
                 className="mx-2 px-5"
                 color="white"
                 size="lg"
                 onClick={handleSubmit}
+                onSubmit={handleSubmit}
+                
               >
                 Login
               </MDBBtn>

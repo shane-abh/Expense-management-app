@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Stats from "./Dashboard/Stats";
 import PieChart from "./Dashboard/PieChart";
 import ExpenseChart from "./Dashboard/ExpenseChart";
 import Header from "./Header";
+import { useNavigate } from "react-router-dom";
+import BalanceChart from "./Dashboard/BalanceChart";
+import "./css/Dashboard.css";
+import TransactionList from "./Transactions/TransactionList";
+import BudgetVSActuals from "./Budgets/BudgetVSActuals";
 
 const Dashboard = () => {
   const authenticatedUser =
-    JSON.parse(sessionStorage.getItem("authenticatedUser")) || {};
+    JSON.parse(sessionStorage.getItem("authenticatedUser")) || "empty";
 
   console.log(`user${authenticatedUser.id}`);
   const userData = JSON.parse(
@@ -26,17 +31,26 @@ const Dashboard = () => {
 
   return (
     <div>
-        <Header/>
+      <Header />
       <Stats
         userData={userData}
         statsData={statsData}
         setStatsData={setStatsData}
-        updateUserDataInLocalStorage= {updateUserDataInLocalStorage}
+        updateUserDataInLocalStorage={updateUserDataInLocalStorage}
       />
+      <div className="listoverview">
+        <TransactionList
+          authenticatedUser={authenticatedUser}
+          transactions={userData}
+        />
+        <PieChart statsData={statsData} />
+      </div>
+      <div className="charts">
+        <ExpenseChart userData={userData} />
+        <BalanceChart userData={userData} />
+      </div>
 
-      <PieChart statsData={statsData}/>
-
-      <ExpenseChart userData={userData}/>
+      <BudgetVSActuals userData={userData}/>
     </div>
   );
 };

@@ -10,8 +10,12 @@ import Home from "./Home";
 import Login from "./Login";
 import Transactions from "./Transactions";
 import Dashboard from "./Dashboard";
+import Budgets from "./Budgets";
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    () => sessionStorage.getItem("authenticatedUser") !== null
+  );
   return (
     <div>
       <BrowserRouter>
@@ -21,6 +25,7 @@ function App() {
           <Route path="/registration" element={<Registration />} />
           <Route path="/transaction" element={<Transactions />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/budgets" element={<Budgets />} />
         </Routes>
       </BrowserRouter>
     </div>
