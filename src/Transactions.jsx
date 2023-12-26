@@ -18,7 +18,7 @@ const Transactions = () => {
   const authenticatedUser =
     JSON.parse(sessionStorage.getItem("authenticatedUser")) || {};
     if(authenticatedUser=={}){
-      navigate('/Expense-management-app/login')
+      navigate('/login')
     }
   console.log(`user${authenticatedUser.id}`);
   const userData = JSON.parse(
