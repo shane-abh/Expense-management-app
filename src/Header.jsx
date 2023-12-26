@@ -57,7 +57,7 @@ const Header = () => {
               <a href={isLoggedIn? "/Expense-management-app/budgets" : "/Expense-management-app/login"}>Budgets</a>
             </li>
             <li>
-              {isLoggedIn? <a href="/Expense-management-app" onClick={handleLogOut}>Log Out</a>:  <a href= "/login">Log In</a>}
+              {isLoggedIn? <a href="/Expense-management-app" onClick={handleLogOut}>Log Out</a>:  <a href= "/Expense-management-app/login">Log In</a>}
             </li>
           </ul>
         </nav>
