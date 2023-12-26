@@ -75,7 +75,7 @@ const Registration = () => {
       localStorage.setItem(`user${data.id}`, JSON.stringify(userData));
 
       console.log(" Go to login page");
-      navigate("/login");
+      navigate("/Expense-management-app/login");
     }
   };
 
