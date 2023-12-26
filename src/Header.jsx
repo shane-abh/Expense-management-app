@@ -48,7 +48,7 @@ const Header = () => {
               
               
               
-              <a href={isLoggedIn? "/Expense-management-app/dashboard": "/Expense-management-app/login"}>Dashboard</a>
+              <a href={isLoggedIn? "/Expense-management-app/dashboard": "/login"}>Dashboard</a>
             </li>
             <li>
               <a href={isLoggedIn? "/Expense-management-app/transaction" : "/Expense-management-app/login"}>Transactions</a>
