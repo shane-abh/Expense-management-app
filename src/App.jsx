@@ -20,7 +20,7 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/Expense-management-app" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/Expense-management-app/login" element={<Login />} />
           <Route path="/Expense-management-app/registration" element={<Registration />} />
           <Route path="/Expense-management-app/transaction" element={<Transactions />} />
