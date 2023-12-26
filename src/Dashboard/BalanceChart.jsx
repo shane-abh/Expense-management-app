@@ -61,6 +61,7 @@ const BalanceChart = ({userData}) => {
   
     const options = {
       responsive: true,
+      maintainAspectRatio: true,
       plugins: {
         legend: {
           labels: {

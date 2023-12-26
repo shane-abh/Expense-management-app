@@ -9,6 +9,7 @@ import {
 } from "mdb-react-ui-kit";
 import "./css/Registration.css";
 import { useNavigate } from "react-router-dom";
+import Header from "./Header";
 
 const Registration = () => {
   const navigate = useNavigate();
@@ -79,6 +80,9 @@ const Registration = () => {
   };
 
   return (
+    <>
+   
+    <Header/>
     <form>
       <MDBContainer
         fluid
@@ -132,6 +136,7 @@ const Registration = () => {
         </MDBCard>
       </MDBContainer>
     </form>
+    </>
   );
 };
 

@@ -22,9 +22,21 @@ import {
 const BudgetVSActuals = ({userData}) => {
     const budgetVsActuals = userData.dashboardData.budgetVsActuals;
 
-    const categories = budgetVsActuals.map((item) => item.category);
-    const budgetAmounts = budgetVsActuals.map((item) => item.budget);
-    const actualAmounts = budgetVsActuals.map((item) => item.actual);
+    const categories = []
+    const budgetAmounts = []
+    const actualAmounts = []
+
+    const cat = []
+
+    const exp = budgetVsActuals.map((item) => {
+      if(parseFloat(item.actual)!=0){
+        categories.push(item.category);
+        budgetAmounts.push(item.budget);
+        actualAmounts.push(item.actual)
+      }
+    })
+
+ 
 
     const legendColor = 'black';
 
@@ -101,7 +113,7 @@ const BudgetVSActuals = ({userData}) => {
         borderRadius: 10,
         margin: "20px auto",
       }}>
-        <Bar options={options} data={data} />;
+        <Bar options={options} data={data} />
     </div>
   )
 }

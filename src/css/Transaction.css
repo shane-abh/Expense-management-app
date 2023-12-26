@@ -1,6 +1,6 @@
 select,
 input[type=date] {
-    padding: 10px 0;
+    padding: 0.8em 0.5em;
     background-color: #332D2D;
     color: white;
     border-radius: 5px;
@@ -13,13 +13,23 @@ option {
     background-color: aliceblue;
 }
 
+h3{
+    text-align: center;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    font-weight: bold;
+    color: black;
+    font-size: 1.5em;
+}
+
 table,
 th,
 td {
 
     border: 2px solid black;
-
+    margin: auto;
     border-collapse: collapse;
+    font-size: 1em;
 }
 
 
@@ -46,16 +56,22 @@ td {
     padding: 5px 10px;
 }
 
-.icon {
+.tableIcon {
     width: 25px;
     cursor: pointer;
     margin: auto 5px;
     padding: 2px;
 }
 
-.icon:hover {
+.tableIcon:hover {
     background: linear-gradient(90deg, #e3efff, rgb(250, 218, 218));
     border-radius: 10px;
 
 
+}
+
+@media only screen and (max-width: 1000px){
+    select, input{
+        width: 20%;
+    }
 }

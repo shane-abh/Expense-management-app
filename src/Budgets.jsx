@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import { expenseOptions } from "./data/data.js";
 import "./css/Budgets.css";
@@ -14,6 +14,7 @@ const Budgets = () => {
 
   const [selectedValue, setSelectedValue] = useState("Category");
   const [amount, setAmount] = useState(0);
+  const [budgetTableData, setBudgetTableData] = useState(userData.budgetCategories)
 
   const handleSelect = () => {
     setSelectedValue(event.target.value);
@@ -24,14 +25,25 @@ const Budgets = () => {
     localStorage.setItem(`user${authenticatedUser.id}`, userDataJSON);
   }
 
+  useEffect(() => {
+    // This effect will run whenever transactions change
+    // You can perform any actions needed when the data updates
+    console.log( userData);
+
+    if(userData)
+    setBudgetTableData(userData.budgetCategories)
+
+
+  }, [userData]);
+
   const handleSubmit = () => {
     event.preventDefault();
 
     userData.budgetCategories.push({
-        id: selectedValue.toLowerCase(),
-        name: selectedValue,
-        budget: amount,
-      });
+      id: selectedValue.toLowerCase(),
+      name: selectedValue,
+      budget: amount,
+    });
 
     const transactions = userData.transactions;
     const budgetCategories = userData.budgetCategories;
@@ -51,6 +63,8 @@ const Budgets = () => {
           transaction.category.toLowerCase() === category.name.toLowerCase()
       );
 
+      
+
       budgetCategory.actual = categoryTransactions.reduce(
         (total, transaction) => {
           if (transaction.type === "Expense") {
@@ -64,8 +78,8 @@ const Budgets = () => {
       budgetVsActuals.push(budgetCategory);
     });
     userData.dashboardData.budgetVsActuals = budgetVsActuals;
-    console.log(budgetVsActuals)
-    updateUserData(userData)
+    console.log(budgetVsActuals);
+    updateUserData(userData);
   };
   return (
     <div>
@@ -98,8 +112,27 @@ const Budgets = () => {
         />
         <br />
 
-        <button type="submit" onSubmit={handleSubmit} onClick={handleSubmit}>Add</button>
+        <button type="submit" onSubmit={handleSubmit} onClick={handleSubmit}>
+          Add
+        </button>
       </form>
+
+      <table>
+        <thead>
+          <tr>
+            <td>Category</td>
+            <td>Budget Amount</td>
+          </tr>
+        </thead>
+        <tbody>
+          {budgetTableData.map((item) => {
+            return(
+              <tr><td>{item.name}</td>
+              <td>{"$ "+item.budget}</td></tr>)
+            
+          })}
+        </tbody>
+      </table>
     </div>
   );
 };

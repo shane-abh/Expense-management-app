@@ -13,10 +13,9 @@ const ReadOnlyRow = ({item, index, handleEditClick, handleDeleteClick} ) => {
         <td>{item.balance}</td>
         <td>{item.description}</td>
         <td>
-        <img src={editIcon} alt="Edit" className="icon"  onClick={()=>handleEditClick(event, index, item)}/>
-        <img src={deleteIcon} alt="My Icon" className="icon"  onClick={() => handleDeleteClick(index)}/>
-          {/* <button type='button' onClick={()=>handleEditClick(event, index, item)}>Edit</button> */}
-          {/* <button type='button' onClick={() => handleDeleteClick(index)}>Delete</button> */}
+        <img src={editIcon} alt="Edit" className="tableIcon"  onClick={()=>handleEditClick(event, index, item)}/>
+        <img src={deleteIcon} alt="Delete" className="tableIcon"  onClick={() => handleDeleteClick(index)}/>
+      
          </td>
       </tr>
     );

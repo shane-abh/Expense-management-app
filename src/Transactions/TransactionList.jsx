@@ -147,6 +147,7 @@ const TransactionList = ({ authenticatedUser , transactions}) => {
 
   return (
     <div>
+      <h3>Transaction List</h3>
       <form onSubmit={handleEditFormSubmit}>
         <div className="fixedHead">
 

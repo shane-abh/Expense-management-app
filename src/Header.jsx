@@ -36,7 +36,7 @@ const Header = () => {
     <div>
       <header className={`header ${menuOpen ? "menu-open" : ""}`}>
         <div className="logo">
-          <h2>Expense Manager</h2>
+          <h2>BudgetBee</h2>
         </div>
 
         <nav className="nav">
@@ -57,7 +57,7 @@ const Header = () => {
               <a href={isLoggedIn? "/budgets" : "/login"}>Budgets</a>
             </li>
             <li>
-              <a href="/" onClick={handleLogOut}>Log Out</a>
+              {isLoggedIn? <a href="/" onClick={handleLogOut}>Log Out</a>:  <a href= "/login">Log In</a>}
             </li>
           </ul>
         </nav>

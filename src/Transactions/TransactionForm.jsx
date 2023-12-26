@@ -8,10 +8,17 @@ import {
   MDBCardBody,
   MDBInput,
   MDBIcon,
+  MDBModal,
+  MDBModalDialog,
+  MDBModalContent,
+  MDBModalHeader,
+  MDBModalTitle,
+  MDBModalBody,
+  MDBModalFooter,
 } from "mdb-react-ui-kit";
 import "../css/Transaction.css";
 
-const TransactionForm = ({ authenticatedUser, updateTransactions  }) => {
+const TransactionForm = ({ authenticatedUser, updateTransactions }) => {
   const userData = JSON.parse(
     localStorage.getItem(`user${authenticatedUser.id}`)
   );
@@ -56,7 +63,48 @@ const TransactionForm = ({ authenticatedUser, updateTransactions  }) => {
     "Rent or Mortgage",
   ];
 
+  //Dialog
+  const [basicModal, setBasicModal] = useState(false);
+
+  const toggleShow = () => setBasicModal(!basicModal);
+
   const categoriesData = isIncome ? incomeOptions : expenseOptions;
+
+  function updateBudgetVSActuals(userData) {
+    const transactions = userData.transactions;
+    const budgetCategories = userData.budgetCategories;
+
+    const budgetVsActuals = [];
+
+    budgetCategories.forEach((category) => {
+      const budgetCategory = {
+        category: category.name,
+        budget: category.budget,
+        actual: 0,
+      };
+
+      // Calculate actual expenses for the category
+      const categoryTransactions = transactions.filter(
+        (transaction) =>
+          transaction.category.toLowerCase() === category.name.toLowerCase()
+      );
+
+      budgetCategory.actual = categoryTransactions.reduce(
+        (total, transaction) => {
+          if (transaction.type === "Expense") {
+            return parseFloat(total) + parseFloat(transaction.amount);
+          }
+          return total;
+        },
+        0
+      );
+
+      budgetVsActuals.push(budgetCategory);
+    });
+    userData.dashboardData.budgetVsActuals = budgetVsActuals;
+    console.log(budgetVsActuals);
+    updateTransactions(userData);
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -107,12 +155,22 @@ const TransactionForm = ({ authenticatedUser, updateTransactions  }) => {
 
       console.log(newTransactionData);
 
-      updateTransactions(userData)
-
+      updateTransactions(userData);
+      updateBudgetVSActuals(userData);
 
       const userDataJSON = JSON.stringify(userData);
       localStorage.setItem(`user${authenticatedUser.id}`, userDataJSON);
+
+      setBasicModal(true);
+      handleReset();
     }
+  };
+
+  const handleReset = () => {
+     setSelectedValue("");
+     setAmount(0.0);
+     setDescription("");
+     setDate(new Date());
   };
   return (
     <MDBCard
@@ -120,7 +178,7 @@ const TransactionForm = ({ authenticatedUser, updateTransactions  }) => {
       style={{ borderRadius: "1rem", maxWidth: "800px" }}
     >
       <MDBCardBody className="p-5 d-flex flex-column align-items-center mx-auto w-100">
-        <h2 className="fw-bold mb-2 text-uppercase">Add New Transaction</h2>
+        <h2 className="fw-bold mb-2 text-uppercase text-center">Add New Transaction</h2>
         <p className="text-white-50 mb-5">
           Please enter your Transaction details!
         </p>
@@ -187,7 +245,7 @@ const TransactionForm = ({ authenticatedUser, updateTransactions  }) => {
         <input
           type="date"
           value={date}
-          onChange={(e) => setDate((e.target.value))}
+          onChange={(e) => setDate(e.target.value)}
           required
         />
 
@@ -201,6 +259,31 @@ const TransactionForm = ({ authenticatedUser, updateTransactions  }) => {
           Add
         </MDBBtn>
       </MDBCardBody>
+      <MDBModal show={basicModal} setShow={setBasicModal} tabIndex="-1">
+        <MDBModalDialog>
+          <MDBModalContent>
+            <MDBModalHeader>
+              <MDBModalTitle style={{ color: "black" }}>
+                Modal title
+              </MDBModalTitle>
+              <MDBBtn
+                className="btn-close"
+                color="none"
+                onClick={toggleShow}
+              ></MDBBtn>
+            </MDBModalHeader>
+            <MDBModalBody style={{ color: "black" }}>
+              Transaction Added
+            </MDBModalBody>
+
+            <MDBModalFooter>
+              <MDBBtn color="secondary" onClick={toggleShow}>
+                Close
+              </MDBBtn>
+            </MDBModalFooter>
+          </MDBModalContent>
+        </MDBModalDialog>
+      </MDBModal>
     </MDBCard>
   );
 };

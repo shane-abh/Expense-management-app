@@ -14,8 +14,8 @@ const Dashboard = () => {
     JSON.parse(sessionStorage.getItem("authenticatedUser")) || "empty";
 
   console.log(`user${authenticatedUser.id}`);
-  const userData = JSON.parse(
-    localStorage.getItem(`user${authenticatedUser.id}`)
+  const [userData, setUserData] = useState(
+    JSON.parse(localStorage.getItem(`user${authenticatedUser.id}`))
   );
 
   const [statsData, setStatsData] = useState({
@@ -28,6 +28,13 @@ const Dashboard = () => {
     const userDataJSON = JSON.stringify(userData);
     localStorage.setItem(`user${authenticatedUser.id}`, userDataJSON);
   };
+
+  useEffect(() => {
+    // This effect will run whenever transactions change
+    // You can perform any actions needed when the data updates
+
+    if (userData) setUserData(userData);
+  }, [userData]);
 
   return (
     <div>
@@ -49,8 +56,12 @@ const Dashboard = () => {
         <ExpenseChart userData={userData} />
         <BalanceChart userData={userData} />
       </div>
-
-      <BudgetVSActuals userData={userData}/>
+      {console.log(userData.budgetCategories.id == [])}
+      {userData.budgetCategories.id == [] ? (
+        ""
+      ) : (
+        <BudgetVSActuals userData={userData} />
+      )}
     </div>
   );
 };

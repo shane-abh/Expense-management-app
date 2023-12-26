@@ -57,7 +57,7 @@ const Stats = ({
         </div>
         <div>
           <h2>Income</h2>
-          <p className="income">{statsData.totalIncome}</p>
+          <p className="income">{"$"+statsData.totalIncome}</p>
         </div>
       </div>
 
@@ -67,7 +67,7 @@ const Stats = ({
         </div>
         <div>
           <h2>Expense</h2>
-          <p className="expense">{statsData.totalExpenses}</p>
+          <p className="expense">{"$"+statsData.totalExpenses}</p>
         </div>
       </div>
       <div className="card">
@@ -76,7 +76,7 @@ const Stats = ({
         </div>
         <div>
           <h2>Overall Savings</h2>
-          <p className="savings">{statsData.overallSavings}</p>
+          <p className="savings">{"$"+statsData.overallSavings}</p>
         </div>
       </div>
     </div>

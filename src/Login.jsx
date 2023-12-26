@@ -11,6 +11,7 @@ import {
 } from "mdb-react-ui-kit";
 import Home from "./Home";
 import { Navigate, useNavigate } from "react-router-dom";
+import Header from "./Header";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -37,6 +38,9 @@ const Login = () => {
     console.log("Submitted");
   };
   return (
+    <>
+    
+    <Header/>
     <MDBContainer fluid>
       <MDBRow className="d-flex justify-content-center align-items-center h-100">
         <MDBCol col="12">
@@ -87,7 +91,7 @@ const Login = () => {
                 size="lg"
                 onClick={handleSubmit}
                 onSubmit={handleSubmit}
-                
+              
               >
                 Login
               </MDBBtn>
@@ -103,6 +107,7 @@ const Login = () => {
         </MDBCol>
       </MDBRow>
     </MDBContainer>
+    </>
   );
 };
 

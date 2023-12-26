@@ -1,0 +1,106 @@
+/* Add this CSS in a separate stylesheet or in a style block within your component */
+
+.homepage {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+.hero-img {
+  
+    width: 100%;
+    height: auto;
+    border-radius: 1em;
+    margin-bottom: 2em;
+}
+h1 {
+    font-size: 2rem;
+    margin-bottom: 1em;
+}
+
+p {
+    font-size: 1.2rem;
+    margin-bottom: 2em;
+    text-align: left;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.h2-heading {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.home-ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.home-li {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    /* width: 48%; */
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: antiquewhite;
+    border-radius: 10px;
+    /* border: 2px solid black; */
+    
+}
+
+.home-li img {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+
+
+.icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: antiquewhite;
+  
+}
+
+.icon img {
+    width: 10em;
+}
+
+.cta-button {
+    background-color: #007bff;
+    color: #fff;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 2em;
+}
+
+.cta-button:hover {
+    background-color: #0056b3;
+}
+
+.cta-button a{
+    text-decoration: none;
+    color: white;
+}
+
+/* Add media queries for responsive design */
+
+@media (max-width: 768px) {
+    .home-ul {
+        flex-direction: column;
+    }
+
+    .home-li {
+        width: 100%;
+    }
+}

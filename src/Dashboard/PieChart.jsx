@@ -23,7 +23,17 @@ const PieChart = ({ statsData }) => {
 
   const options = {
     responsive: true,
+    maintainAspectRatio: true,
     plugins: {
+      title: {
+        display: true,
+        text: "Distribution",
+        font: {
+          weight: "bold",
+          size: 24,
+        },
+        color:legendColor,
+      },
       legend: {
         labels: {
           color: legendColor,
