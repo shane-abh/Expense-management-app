@@ -23,9 +23,9 @@ function App() {
           <Route path="/Expense-management-app" element={<Home />} />
           <Route path="/Expense-management-app/login" element={<Login />} />
           <Route path="/Expense-management-app/registration" element={<Registration />} />
-          <Route path="/transaction" element={<Transactions />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/budgets" element={<Budgets />} />
+          <Route path="/Expense-management-app/transaction" element={<Transactions />} />
+          <Route path="/Expense-management-app/dashboard" element={<Dashboard />} />
+          <Route path="/Expense-management-app/budgets" element={<Budgets />} />
         </Routes>
       </BrowserRouter>
     </div>

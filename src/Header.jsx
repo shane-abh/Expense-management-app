@@ -48,16 +48,16 @@ const Header = () => {
               
               
               
-              <a href={isLoggedIn? "/dashboard": "/login"}>Dashboard</a>
+              <a href={isLoggedIn? "/Expense-management-app/dashboard": "/Expense-management-app/login"}>Dashboard</a>
             </li>
             <li>
-              <a href={isLoggedIn? "/transaction" : "/login"}>Transactions</a>
+              <a href={isLoggedIn? "/Expense-management-app/transaction" : "/Expense-management-app/login"}>Transactions</a>
             </li>
             <li>
-              <a href={isLoggedIn? "/budgets" : "/login"}>Budgets</a>
+              <a href={isLoggedIn? "/Expense-management-app/budgets" : "/Expense-management-app/login"}>Budgets</a>
             </li>
             <li>
-              {isLoggedIn? <a href="/" onClick={handleLogOut}>Log Out</a>:  <a href= "/login">Log In</a>}
+              {isLoggedIn? <a href="/Expense-management-app" onClick={handleLogOut}>Log Out</a>:  <a href= "/Expense-management-app/login">Log In</a>}
             </li>
           </ul>
         </nav>

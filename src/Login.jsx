@@ -29,7 +29,7 @@ const Login = () => {
       console.log('Logged in')
       sessionStorage.setItem("authenticatedUser", JSON.stringify(user));
 
-      navigate("/transaction");
+      navigate("/Expense-management-app/transaction");
     }else{
       console.log(`Invalid credentials`)
     }
@@ -98,7 +98,7 @@ const Login = () => {
 
               <div>
                 <p className="mt-4">Don't have an account?</p>
-                <a href="/registration" className="text-white-50 fw-bold mx-5">
+                <a href="/Expense-management-app/registration" className="text-white-50 fw-bold mx-5">
                   Sign Up
                 </a>
               </div>

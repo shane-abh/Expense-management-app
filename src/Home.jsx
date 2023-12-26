@@ -21,7 +21,7 @@ const Home = () => {
             you need to achieve your financial goals.
           </p>
           <button className="cta-button">
-            <a href="./registration">Sign Up for Free</a>
+            <a href="./Expense-management-app/registration">Sign Up for Free</a>
           </button>
         </section>
 
